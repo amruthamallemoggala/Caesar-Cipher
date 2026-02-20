@@ -1,0 +1,36 @@
+def caesar_encrypt(message, shift):
+    encrypted_text = ""
+    
+    for char in message:
+        if char.isalpha():
+            shift_base = 65 if char.isupper() else 97
+            encrypted_char = chr((ord(char) - shift_base + shift) % 26 + shift_base)
+            encrypted_text += encrypted_char
+        else:
+            encrypted_text += char   # Keep spaces & symbols unchanged
+            
+    return encrypted_text
+
+
+def caesar_decrypt(message, shift):
+    return caesar_encrypt(message, -shift)
+
+
+# --------- User Input ---------
+message = input("Enter your message: ")
+shift = int(input("Enter shift value: "))
+
+print("\n1. Encrypt")
+print("2. Decrypt")
+choice = input("Choose (1/2): ")
+
+if choice == "1":
+    result = caesar_encrypt(message, shift)
+    print("Encrypted Message:", result)
+
+elif choice == "2":
+    result = caesar_decrypt(message, shift)
+    print("Decrypted Message:", result)
+
+else:
+    print("Invalid choice!")
